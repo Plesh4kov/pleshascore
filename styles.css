@@ -15,10 +15,8 @@
     --hover-bg-ct: rgba(110,88,171,0.15);
     --hover-bg-t: rgba(153,137,89,0.15);
 
-    /* Предположим изначальный размер шрифта был 22px для заголовков */
-    --header-font-size: 30px;
-    /* Предположим изначальный размер шрифта для игроков был 14px */
-    --player-font-size: 17px;
+    --header-font-size: 22px; 
+    --player-font-size: 14px;
 
     --font-family: 'BebasNeue', Arial, sans-serif;
 }
@@ -61,11 +59,10 @@ body {
 .score-line {
     display: flex;
     align-items: center;
-    /* Увеличиваем шрифт заголовков на 15% */
     font-size: calc(var(--header-font-size) * 1.15);
     font-weight: bold;
     justify-content: center;
-    gap: 40px;
+    gap: 40px; 
 }
 
 .team-info {
@@ -105,7 +102,7 @@ body {
 
 .map-info {
     margin-top: 5px;
-    font-size: calc(var(--player-font-size) * 1.15); /* тоже увеличим на 15% */
+    font-size: calc(var(--player-font-size) * 1.15);
     color: #ccc;
     text-align: center;
     width: 100%;
@@ -136,7 +133,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(var(--player-font-size) * 1.15); /* увеличим и тут */
+    font-size: calc(var(--player-font-size) * 1.15);
     font-weight: bold;
     color: #ccc;
     text-transform: uppercase;
@@ -146,9 +143,8 @@ body {
 
 .player-col {
     flex: 2;
-    text-align: left;
-    /* Изначально было padding-left: 10px; сделаем больше, например 20px */
-    padding-left: 20px;
+    text-align: center; 
+    padding-left: 0;
 }
 
 .stat-col {
@@ -158,7 +154,7 @@ body {
 
 .players-table {
     border-radius: 0 0 8px 8px;
-    padding: 13px;
+    padding: 10px;
     font-family: var(--font-family);
     font-size: calc(var(--player-font-size) * 1.15);
 }
@@ -188,14 +184,10 @@ body {
     padding: 5px 0;
 }
 
-.player-col.player-name {
-    flex: 1.5; /* Уменьшаем ширину колонки, если нужно */
+.players-table .player-name {
     text-align: center;
-    padding-left: 0;
+    flex: 2;
 }
-
-
-
 
 .players-table .stat-col {
     text-align: center;
@@ -210,45 +202,85 @@ body {
     background: var(--hover-bg-t);
 }
 
-.round-history {
+/* Round History */
+
+.round-history-title {
+    font-size: calc(var(--player-font-size) * 1.15);
+    font-family: var(--font-family);
+    color: #ccc;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Контейнер для половин и линии */
+.halves-container {
+    position: relative;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+/* Каждая половина раундов */
+.half-rounds {
+    display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    padding: 10px 0;
-    font-family: var(--font-family);
-    font-size: calc(var(--player-font-size) * 1.15);
+    gap: 10px;
+    flex: 1;
 }
 
-.round-dot {
-    width: 16px;
-    height: 16px;
-    background: #ccc;
-    position: relative;
-    border-radius: 0;
+/* Первая половина прижата к правому краю, чтобы быть ближе к линии */
+.half-rounds:first-child {
+    justify-content: flex-end;
+    margin-right: 10px; /* Увеличиваем отступ справа у левой половины */
 }
 
-.round-dot.ct-win {
-    background: var(--ct-color);
+.half-rounds:last-child {
+    justify-content: flex-start;
+    margin-left: 20px;  /* Увеличиваем отступ слева у правой половины */
 }
 
-.round-dot.t-win {
-    background: var(--t-color);
+
+/* Вторая половина прижата к левому краю, чтобы быть ближе к линии */
+.half-rounds:last-child {
+    justify-content: flex-start;
+    margin-left: 20px;  /* Увеличиваем отступ слева у правой половины */
 }
 
-.round-dot:hover::after {
-    content: attr(data-round-info);
+/* Линия по центру контейнера */
+.rounds-divider {
     position: absolute;
-    bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
-    background: #222;
-    color: #fff;
-    font-size: 12px;
-    padding: 3px 5px;
-    border-radius: 4px;
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 10;
+    width: 1px;
+    background: #ccc;
+    height: 30px;
+}
+
+.round-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.round-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin: 0 3px;
+}
+
+.round-number {
+    font-size: 10px;
+    color: #ccc;
+    margin-top: 2px;
+}
+
+.t-win {
+    /* стили для T, если нужно */
+}
+
+.ct-win {
+    /* стили для CT, если нужно */
 }
