@@ -93,23 +93,94 @@ function renderRoundHistory(roundWins) {
     const roundHistoryContainer = document.getElementById('round-history');
     roundHistoryContainer.innerHTML = '';
 
+    // Заголовок "Round History"
+    const roundHistoryTitle = document.createElement('div');
+    roundHistoryTitle.className = 'round-history-title';
+    roundHistoryTitle.textContent = 'Round History';
+    roundHistoryContainer.appendChild(roundHistoryTitle);
+
     const roundNumbers = Object.keys(roundWins).map(n => parseInt(n)).sort((a,b) => a - b);
 
-    roundNumbers.forEach(roundNumber => {
-        const result = roundWins[roundNumber.toString()];
-        const dot = document.createElement('div');
-        dot.className = 'round-dot';
+    // Первая половина: 1-12, вторая половина: >12
+    const firstHalfRounds = roundNumbers.filter(n => n <= 12);
+    const secondHalfRounds = roundNumbers.filter(n => n > 12);
 
-        if (result.startsWith('t_win')) {
-            dot.classList.add('t-win');
-        } else if (result.startsWith('ct_win')) {
-            dot.classList.add('ct-win');
-        }
+    const halvesContainer = document.createElement('div');
+    halvesContainer.className = 'halves-container';
+    roundHistoryContainer.appendChild(halvesContainer);
 
-        dot.setAttribute('data-round-info', `Round ${roundNumber}: ${result}`);
+    const firstHalfContainer = document.createElement('div');
+    firstHalfContainer.className = 'half-rounds';
+    halvesContainer.appendChild(firstHalfContainer);
 
-        roundHistoryContainer.appendChild(dot);
+    firstHalfRounds.forEach(roundNumber => {
+        const roundWrapper = createRoundIcon(roundNumber, roundWins[roundNumber.toString()]);
+        firstHalfContainer.appendChild(roundWrapper);
     });
+
+    // Разделительная линия по центру
+    const divider = document.createElement('div');
+    divider.className = 'rounds-divider';
+    halvesContainer.appendChild(divider);
+
+    const secondHalfContainer = document.createElement('div');
+    secondHalfContainer.className = 'half-rounds';
+    halvesContainer.appendChild(secondHalfContainer);
+
+    secondHalfRounds.forEach(roundNumber => {
+        const roundWrapper = createRoundIcon(roundNumber, roundWins[roundNumber.toString()]);
+        secondHalfContainer.appendChild(roundWrapper);
+    });
+}
+
+function createRoundIcon(roundNumber, result) {
+    let iconPath;
+    let teamColorClass;
+
+    switch (result) {
+        case 't_win_elimination':
+            iconPath = 'icons/t_win_elimination.png';
+            teamColorClass = 't-win';
+            break;
+        case 't_win_bomb':
+            iconPath = 'icons/t_win_bomb.png';
+            teamColorClass = 't-win';
+            break;
+        case 'ct_win_elimination':
+            iconPath = 'icons/ct_win_elimination.png';
+            teamColorClass = 'ct-win';
+            break;
+        case 'ct_win_defuse':
+            iconPath = 'icons/ct_win_defuse.png';
+            teamColorClass = 'ct-win';
+            break;
+        case 'ct_win_time':
+            iconPath = 'icons/ct_win_time.png';
+            teamColorClass = 'ct-win';
+            break;
+        default:
+            iconPath = 'icons/default.png';
+            teamColorClass = '';
+            break;
+    }
+
+    const roundWrapper = document.createElement('div');
+    roundWrapper.className = 'round-wrapper';
+
+    const icon = document.createElement('img');
+    icon.src = iconPath;
+    icon.alt = result;
+    icon.className = `round-icon ${teamColorClass}`;
+    icon.setAttribute('data-round-info', `Round ${roundNumber}: ${result}`);
+
+    const roundLabel = document.createElement('span');
+    roundLabel.className = 'round-number';
+    roundLabel.textContent = roundNumber;
+
+    roundWrapper.appendChild(icon);
+    roundWrapper.appendChild(roundLabel);
+
+    return roundWrapper;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
