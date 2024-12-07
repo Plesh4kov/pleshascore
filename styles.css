@@ -1,0 +1,254 @@
+@font-face {
+    font-family: 'BebasNeue';
+    src: url('fonts/bebasneue-webfont.woff2') format('woff2'),
+         url('fonts/bebasneue-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --bg-color: rgba(15,15,15,0.9);
+    --text-color: #fff;
+    --ct-color: #6E58AB;
+    --t-color: #998959;
+    --divider-color: #555;
+    --hover-bg-ct: rgba(110,88,171,0.15);
+    --hover-bg-t: rgba(153,137,89,0.15);
+
+    /* Предположим изначальный размер шрифта был 22px для заголовков */
+    --header-font-size: 30px;
+    /* Предположим изначальный размер шрифта для игроков был 14px */
+    --player-font-size: 17px;
+
+    --font-family: 'BebasNeue', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: none;
+    font-family: var(--font-family);
+    color: var(--text-color);
+}
+
+.scoreboard-container {
+    width: 1200px;
+    max-width: 90%;
+    margin: 30px auto;
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.scoreboard-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--divider-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.match-score-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-line {
+    display: flex;
+    align-items: center;
+    /* Увеличиваем шрифт заголовков на 15% */
+    font-size: calc(var(--header-font-size) * 1.15);
+    font-weight: bold;
+    justify-content: center;
+    gap: 40px;
+}
+
+.team-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    font-family: var(--font-family);
+}
+
+.team-info.ct-side .team-name {
+    color: var(--ct-color);
+}
+
+.team-info.t-side .team-name {
+    color: var(--t-color);
+}
+
+.team-info .team-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.score-line .ct {
+    color: var(--ct-color);
+}
+
+.score-line .t {
+    color: var(--t-color);
+}
+
+.score-divider {
+    color: #aaa;
+    font-size: 36px;
+}
+
+.map-info {
+    margin-top: 5px;
+    font-size: calc(var(--player-font-size) * 1.15); /* тоже увеличим на 15% */
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+    font-family: var(--font-family);
+}
+
+.teams-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.team-table {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 10px;
+    font-family: var(--font-family);
+}
+
+.table-header {
+    display: flex;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--player-font-size) * 1.15); /* увеличим и тут */
+    font-weight: bold;
+    color: #ccc;
+    text-transform: uppercase;
+    padding: 5px;
+    font-family: var(--font-family);
+}
+
+.player-col {
+    flex: 2;
+    text-align: left;
+    /* Изначально было padding-left: 10px; сделаем больше, например 20px */
+    padding-left: 20px;
+}
+
+.stat-col {
+    flex: 1;
+    text-align: center;
+}
+
+.players-table {
+    border-radius: 0 0 8px 8px;
+    padding: 13px;
+    font-family: var(--font-family);
+    font-size: calc(var(--player-font-size) * 1.15);
+}
+
+/* Фон под игроками CT */
+.ct-side .players-table {
+    background: rgba(110,88,171,0.1);
+}
+
+/* Фон под игроками T */
+.t-side .players-table {
+    background: rgba(153,137,89,0.1);
+}
+
+.players-table .player-row {
+    display: flex;
+    border-bottom: 1px solid #333;
+    padding: 8px 0;
+    align-items: center;
+}
+
+.players-table .player-row:last-child {
+    border-bottom: none;
+}
+
+.players-table .player-row div {
+    padding: 5px 0;
+}
+
+.player-col.player-name {
+    flex: 1.5; /* Уменьшаем ширину колонки, если нужно */
+    text-align: center;
+    padding-left: 0;
+}
+
+
+
+
+.players-table .stat-col {
+    text-align: center;
+    flex: 1;
+}
+
+.ct-side .player-row:hover {
+    background: var(--hover-bg-ct);
+}
+
+.t-side .player-row:hover {
+    background: var(--hover-bg-t);
+}
+
+.round-history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 0;
+    font-family: var(--font-family);
+    font-size: calc(var(--player-font-size) * 1.15);
+}
+
+.round-dot {
+    width: 16px;
+    height: 16px;
+    background: #ccc;
+    position: relative;
+    border-radius: 0;
+}
+
+.round-dot.ct-win {
+    background: var(--ct-color);
+}
+
+.round-dot.t-win {
+    background: var(--t-color);
+}
+
+.round-dot:hover::after {
+    content: attr(data-round-info);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}

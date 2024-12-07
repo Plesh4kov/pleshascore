@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <title>CS:GO Scoreboard</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="scoreboard-container">
+    <div class="scoreboard-header">
+        <div class="match-score-block">
+            <div class="score-line">
+                <div class="team-info ct-side">
+                    <img alt="CT Team" class="team-logo" id="ct-team-logo">
+                    <span class="team-name" id="ct-team-name">CT TEAM</span>
+                    <span class="score ct" id="ct-score">0</span>
+                </div>
+                <span class="score-divider">:</span>
+                <div class="team-info t-side">
+                    <span class="score t" id="t-score">0</span>
+                    <span class="team-name" id="t-team-name">T TEAM</span>
+                    <img alt="T Team" class="team-logo" id="t-team-logo">
+                </div>
+            </div>
+            <div class="map-info" id="map-info"></div>
+        </div>
+    </div>
+
+    <div class="teams-wrapper">
+        <!-- CT TEAM TABLE -->
+        <div class="team-table ct-side">
+            <div class="table-header">
+                <div class="th player-col player-name" id="ct-header-name">CT TEAM</div>
+                <div class="th stat-col"><img src="images/icon_k.png" alt="K" title="Kills"></div>
+                <div class="th stat-col"><img src="images/icon_d.png" alt="D" title="Deaths"></div>
+                <div class="th stat-col"><img src="images/icon_a.png" alt="A" title="Assists"></div>
+                <div class="th stat-col">+/-</div>
+                <div class="th stat-col"><img src="images/icon_score.png" alt="Score" title="Score"></div>
+            </div>
+            <div id="ct-players-container" class="players-table"></div>
+        </div>
+
+        <div class="round-history" id="round-history"></div>
+
+        <!-- T TEAM TABLE -->
+        <div class="team-table t-side">
+            <div class="table-header">
+                <div class="th player-col player-name" id="t-header-name">T TEAM</div>
+                <div class="th stat-col"><img src="images/icon_k.png" alt="K" title="Kills"></div>
+                <div class="th stat-col"><img src="images/icon_d.png" alt="D" title="Deaths"></div>
+                <div class="th stat-col"><img src="images/icon_a.png" alt="A" title="Assists"></div>
+                <div class="th stat-col">+/-</div>
+                <div class="th stat-col"><img src="images/icon_score.png" alt="Score" title="Score"></div>
+            </div>
+            <div id="t-players-container" class="players-table"></div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
